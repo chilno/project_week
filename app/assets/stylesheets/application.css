@@ -1,3 +1,8 @@
+#wrapper2 {
+	margin-left: 200px;
+	margin-right: 200px;
+}
+
 #categories_bar {
 	width: 100%;
 	border-top: 2px solid #beeaf0;
@@ -40,11 +45,6 @@
 	margin-left: 100px;
 }
 
-#rec {
-
-
-}
-
 #lol{
 	padding-left: 100px;
 }
@@ -76,9 +76,7 @@
 	color: white;
 }
 
-ul {
-	color: white;
-}
+
 .list {
 	list-style-type: none;
 	text-decoration: none;
