@@ -55,13 +55,13 @@
     min-width: 250px;
     padding: 14px 14px 0;
     overflow:hidden;
-    background-color:rgba(255,255,255,.8);
+    background-color:rgba(255,255,255,1);
 }
 #login-dp .help-block{
     font-size:12px    
 }
 #login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
+    background-color:rgba(255,255,255,1);
     border-top:1px solid #ddd;
     clear:both;
     padding:14px;
@@ -81,14 +81,26 @@
     color:  #216eb4;
 }
 
-/*#boo{
-    height: 780px;
-    background: url('/assets/for-rent.jpg') no-repeat;
-    background-size: 100%;
-}*/
+#user-show-info{
+	/*background-color: #43b8e5;*/
+	/*color: white;*/
+}
+
+#user-show-product{
+	/*background-color: #f0a81e;*/
+/*	color: white;*/
+}
+
+#user-show-product img{
+	width: 125px;
+}
 
 #background{
     margin-top: 20%;
+}
+
+#hello-title{
+	/*color: #43b8e5;*/
 }
 
 #categories_bar {
