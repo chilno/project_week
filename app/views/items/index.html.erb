@@ -1,0 +1,81 @@
+<script type="text/javascript">
+	
+	(function ya() {     // function expression closure to contain variables
+	    var i = 0;
+	    var pics = [ "http://www.gocontigo.com/media/wysiwyg/contigo_rwd/navigation/BundledDealsApril2016.png", "http://lovelace-media.imgix.net/uploads/647/31e36160-9f49-0132-a2d7-0e6808eb79bf.png?w=700&fit=max&auto=format&q=70", 'http://www.leathercontinental.com/wp-content/uploads/2015/04/guide-how-to-care-for-leather-bags_5.jpg' ];
+	    var el = document.getElementById('img_to_flip');  // el doesn't change
+	    function toggle() {
+            // alert(el)
+	        document.getElementById('img_to_flip').src = pics[i];   
+
+	        i = (i + 1) % pics.length;  // update the counter
+	    }
+	    setInterval(toggle, 5000);
+	})(); 
+</script>
+<div class="container">
+<h1 onload="ya()"></h1>
+<% if @categories %>
+<div id='categories_bar'>
+	<ul>
+		<% @categories.each do |c| %>
+		<li class="categories"><a href="/categories/<%= c.id %>"><%= c.name %></a></li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div id="adds">
+	<div id="adds_img"><img id='img_to_flip' style="width: 300px; height: 300px;" src="https://conciergenews.files.wordpress.com/2010/07/camiseta_adidas_argentina.png"></div>
+	<div id="adds_text">
+		<h4>What are you looking for?</h4>
+		<p>No need to spend money on that item you are going to use only once. Find your perfect item today!</p>
+	</div>
+</div>
+
+<% if  @recommended %>
+	<h3 id="rec">Recommended for you</h3>
+	<div id="lol">
+		<% @recommended.each do |r| %>
+			<div id="recommended">
+				<div><img style="width: 180px; height: 150px;" src="https://www.microsoft.com/nz/windows/products/windowsvista/joinred/images/pclarge2.png"></div>
+				<div>
+				<h4><%= r.name %></h4>
+				<h5><%= r.price%></h5>
+				<a href="/items/<%= r.id %>"><button>Rent</button></a></div>
+			</div>
+		<% end %>
+	</div>
+<% end %>
+
+<% if @items %>
+	<h3>Latest Added Items </h3>
+	<ul id="latest_wrapper">
+		<% @items.each do |i| %>
+			<div id="latest_items">
+				<li class="items"><a href="/items/<%= i.id %>">
+					<img  style="height: 100px; width: 100px;" src="http://pngimg.com/upload/suit_PNG8122.png">
+					<h5><%= i.name %></h5><h5><%= i.price %></h5>
+
+				</a></li>
+			</div>
+		<% end %>
+	</ul>
+<% end %>
+
+<div id="footer">
+	<% if @categories  %>
+	<% @categories.each do |c| %>
+	<div id="footer_columns">
+		<h4><%= c.name %></h6>
+		<ul>
+			<% c.sub_categories.each do |sub| %>
+			<li class="list"><a href="/sub_categories/<%= sub.id%>"><%= sub.name %></a></li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
+	<% end %>
+</div>
+<div id="dark_footer"></div>
+</div>
