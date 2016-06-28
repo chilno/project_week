@@ -1,0 +1,14 @@
+<div id="boo">
+	<div  class="container">
+		<div id="background">
+			<form action="/events" method="POST" class="col-md-6 col-md-offset-3 well">
+			    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+			    <fieldset class="form-group">
+			      <input  type="text" class="form-control" placeholder="What?" name ="event[name]">
+			      <input  type="text" class="form-control" placeholder="Where?" name ="event[name]">
+			      <button style="width:100%" type="submit" class="btn btn-info ">Find It!</button>
+			    </fieldset>
+			</form>
+		</div>
+	</div>
+</div>
