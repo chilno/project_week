@@ -13,3 +13,52 @@
  *= require_tree .
  *= require_self
  */
+ #op{
+    background-color: rgba(182, 177, 175, 0.8);
+    padding: 10px;
+    border-radius: 5px;
+/*    opacity: 0.5;*/
+}
+
+.navbar{
+	background-color: #f0a81e;
+}
+
+#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+}
+#login-dp .help-block{
+    font-size:12px    
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+}
+#login-dp .social-buttons{
+    margin:12px 0    
+}
+#login-dp .social-buttons a{
+    width: 49%;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+
+.navbar a {
+    color:  #216eb4;
+}
+
+/*#boo{
+    height: 780px;
+    background: url('/assets/for-rent.jpg') no-repeat;
+    background-size: 100%;
+}*/
+
+#background{
+    margin-top: 20%;
+}
