@@ -1,41 +1,50 @@
-<script type="text/javascript">
-	
-	(function ya() {     // function expression closure to contain variables
-	    var i = 0;
-	    var pics = [ "http://www.gocontigo.com/media/wysiwyg/contigo_rwd/navigation/BundledDealsApril2016.png", "http://lovelace-media.imgix.net/uploads/647/31e36160-9f49-0132-a2d7-0e6808eb79bf.png?w=700&fit=max&auto=format&q=70", 'http://www.leathercontinental.com/wp-content/uploads/2015/04/guide-how-to-care-for-leather-bags_5.jpg' ];
-	    var el = document.getElementById('img_to_flip');  // el doesn't change
-	    function toggle() {
-            // alert(el)
-	        document.getElementById('img_to_flip').src = pics[i];   
-
-	        i = (i + 1) % pics.length;  // update the counter
-	    }
-	    setInterval(toggle, 5000);
-	})(); 
-</script>
 <div class="container">
 <h1 onload="ya()"></h1>
-<% if @categories %>
 <div id='categories_bar'>
 	<ul>
-		<% @categories.each do |c| %>
-		<li class="categories"><a href="/categories/<%= c.id %>"><%= c.name %></a></li>
-		<% end %>
+		<li class="categories"><a href="/categories/">Appliances</a></li>
+		<li class="categories"><a href="/categories/">Furniture</a></li>
+		<li class="categories"><a href="/categories/">Camping</a></li>
+		<li class="categories"><a href="/categories/">Clothing</a></li>
+		<li class="categories"><a href="/categories/">Books</a></li>
+		<li class="categories"><a href="/categories/">Gaming</a></li>
+		<li class="categories"><a href="/categories/">Computers</a></li>
+		<li class="categories"><a href="/categories/">Electronics</a></li>
+		<li class="categories"><a href="/categories/">Autos / Bikes</a></li>
 	</ul>
 </div>
-<% end %>
 
-<div id="adds">
-	<div id="adds_img"><img id='img_to_flip' style="width: 300px; height: 300px;" src="https://conciergenews.files.wordpress.com/2010/07/camiseta_adidas_argentina.png"></div>
-	<div id="adds_text">
-		<h4>What are you looking for?</h4>
-		<p>No need to spend money on that item you are going to use only once. Find your perfect item today!</p>
-	</div>
-</div>
+      <div class="carousel slide multi-item-carousel" id="theCarousel">
+        <div class="carousel-inner">
+          <div class="item active">
+            <div class="col-xs-4"><a href="#1"><img src="http://www.gocontigo.com/media/wysiwyg/contigo_rwd/navigation/BundledDealsApril2016.png" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-xs-4"><a href="#1"><img src="http://lovelace-media.imgix.net/uploads/647/31e36160-9f49-0132-a2d7-0e6808eb79bf.png?w=700&fit=max&auto=format&q=70" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-xs-4"><a href="#1"><img src="http://www.leathercontinental.com/wp-content/uploads/2015/04/guide-how-to-care-for-leather-bags_5.jpg" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-xs-4"><a href="#1"><img src="https://conciergenews.files.wordpress.com/2010/07/camiseta_adidas_argentina.png" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-xs-4"><a href="#1"><img src="http://g-ecx.images-amazon.com/images/G/01/aplus/detail-page/PS4_lg.jpg" class="img-responsive"></a></div>
+          </div>
+          <div class="item">
+            <div class="col-xs-4"><a href="#1"><img src="http://www.bargainblessings.com/wp-content/uploads/2013/09/coleman-tent.png" class="img-responsive"></a></div>
+          </div>
+        </div>
+        <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+      </div>
 
-<% if  @recommended %>
-	<h3 id="rec">Recommended for you</h3>
+
+	
 	<div id="lol">
+	
+	<% if  @recommended %>
+	<h3 id="rec">Recommended for you</h3>
 		<% @recommended.each do |r| %>
 			<div id="recommended">
 				<div><img style="width: 180px; height: 150px;" src="https://www.microsoft.com/nz/windows/products/windowsvista/joinred/images/pclarge2.png"></div>
@@ -46,22 +55,24 @@
 			</div>
 		<% end %>
 	</div>
-<% end %>
+	<% end %>
+	
 
-<% if @items %>
-	<h3>Latest Added Items </h3>
-	<ul id="latest_wrapper">
-		<% @items.each do |i| %>
-			<div id="latest_items">
-				<li class="items"><a href="/items/<%= i.id %>">
-					<img  style="height: 100px; width: 100px;" src="http://pngimg.com/upload/suit_PNG8122.png">
-					<h5><%= i.name %></h5><h5><%= i.price %></h5>
 
-				</a></li>
-			</div>
-		<% end %>
-	</ul>
-<% end %>
+	<% if @items %>
+		<h3>Latest Added Items </h3>
+		<ul id="latest_wrapper">
+			<% @items.each do |i| %>
+				<div id="latest_items">
+					<li class="items"><a href="/items/<%= i.id %>">
+						<img  style="height: 100px; width: 100px;" src="http://pngimg.com/upload/suit_PNG8122.png">
+						<h5><%= i.name %></h5><h5><%= i.price %></h5>
+
+					</a></li>
+				</div>
+			<% end %>
+		</ul>
+	<% end %>
 
 <div id="footer">
 	<% if @categories  %>
@@ -79,3 +90,21 @@
 </div>
 <div id="dark_footer"></div>
 </div>
+<script type="text/javascript">
+	$('.multi-item-carousel').carousel({
+	  interval: 3000
+	});
+	$('.multi-item-carousel .item').each(function(){
+	var next = $(this).next();
+	if (!next.length) {
+	next = $(this).siblings(':first');
+	}
+	next.children(':first-child').clone().appendTo($(this));
+
+	if (next.next().length>0) {
+	next.next().children(':first-child').clone().appendTo($(this));
+	} else {
+		$(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+	}
+});
+</script>

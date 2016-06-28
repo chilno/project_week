@@ -21,15 +21,25 @@
         </button>
         <a class="navbar-brand" href="/">rentMe</a>
       </div>
-      <% unless current_page?('/users/new')%>
+      <% unless current_page?('/users/new') or current_page?('/users/new')%>
+      <form class="navbar-form navbar-left" role="search" >
+        <div class="form-group">
+          <input type="text" class="form-control " placeholder="What are you looking for..?" id="search-bar">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+      </form>
       <div id="navbar" class="navbar-collapse collapse">  
         <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href=""><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></a>
+          </li>
           <li class="dropdown">
             <% unless session[:id]%>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
             <% else %>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%= @user.first_name %></b> <span class="caret"></span></a>
             <% end %>
+
             <ul id="login-dp" class="dropdown-menu">
               <li>
                 <div class="row">
@@ -76,7 +86,6 @@
 <%= yield %>
 	
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 </body>
 </html>
