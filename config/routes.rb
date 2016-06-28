@@ -1,16 +1,6 @@
 Rails.application.routes.draw do
-  get 'items/create'
-
-  get 'items/destroy'
-
-  get 'items/show'
-
-  get 'users/index'
-
-  get 'users/create'
-
-  get 'users/destroy'
-
+  get '/categories' => 'categories#index'
+  get '/categories/:id' => 'categories#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
