@@ -1,5 +1,6 @@
 <div class="container">
 	<br>
+	<% if current_user %>
 	<div class="clearfix">
 		<h2 id="hello-title" class="pull-left">My Info:</h2>
 		<form class="form " role="form" method="post" action="/login">
@@ -18,25 +19,25 @@
 	          <form action="/add_user" method="POST">
 	          <fieldset class="form-group">
 	            <label>First Name</label>
-	            <input type="text" class="form-control" placeholder="Enter first name" name ="first_name">
+	            <input type="text" class="form-control" placeholder="Enter first name" name ="first_name" value="<%= current_user.first_name %>">
 	          </fieldset>
 	          <fieldset class="form-group">
 	            <label>Last Name</label>
-	            <input type="text" class="form-control" placeholder="Enter last name" name ="last_name">
+	            <input type="text" class="form-control" placeholder="Enter last name" name ="last_name" value="<%= current_user.last_name %>">
 	          </fieldset>
 	          <fieldset class="form-group">
 	            <label>Phone</label>
-	            <input type="text" class="form-control" placeholder="Enter Phone" name ="email">
+	            <input type="text" class="form-control" placeholder="Enter Phone" name ="phone" value="<%= current_user.phone %>">
 	          </fieldset>
 	          <fieldset class="form-group">
 	            <label>Location</label>
-	            <input type="text" class="form-control" placeholder="Enter Location" name ="email">
+	            <input type="text" class="form-control" placeholder="Enter Location" name ="city" value="<%= current_user.city %>">
 	          </fieldset>
 	          <fieldset class="form-group">
 	            <label>State</label>
 		        <select name="user[state]" class="form-control">
 		            <% CS.states(:us).each do |key, value| %>
-		              <option value="<%= key %>"><%= key%></option>
+		              <option><%= key%></option>
 		            <% end %>
 		        </select>
 	          </fieldset>
@@ -46,7 +47,7 @@
 	          </fieldset>
 	          <fieldset class="form-group">
 	            <label>Confirm Password</label>
-	            <input type="password" class="form-control" placeholder="Enter password again" name ="confirm_password">
+	            <input type="password" class="form-control" placeholder="Enter password again" name ="password_confirmation">
 	          </fieldset>
 	          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 	          <button type="submit" class="btn btn-success pull-right">Update</button>
@@ -60,11 +61,13 @@
 
 	</div>
 	<div id="user-show-info" class="well">
-		<h4>Frist Name: <b>Nazim</b></h4>
-		<h4>Last Name: <b>Bellahsene</b></h4>
-		<h4>Phone: <b>415 425 1131</b></h4>
-		<h4>Location: <b>Mountain view, CA</b></h4>
+	
+		<h4>Frist Name: <b><%= current_user.first_name %></b></h4>
+		<h4>Last Name: <b><%= current_user.last_name%></b></h4>
+		<h4>Phone: <b><%= current_user.phone%></b></h4>
+		<h4>Location: <b><%= current_user.city %>, <%= current_user.state%></b></h4>
 	</div>
+	<% end %>
 	<br>
 	<div class="clearfix">
 		<h2 id="hello-title" class="pull-left">My Products:</h2>
@@ -82,6 +85,7 @@
 		        </div>
 		        <div class="modal-body">
 		          <form action="/add_user" method="POST">
+		          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 		          <fieldset class="form-group">
 		            <label>Name</label>
 		            <input type="text" class="form-control" placeholder="Enter name" name ="name">
@@ -93,7 +97,11 @@
 		          <fieldset class="form-group">
 		            <label>Category</label>
 		            <select name ="category" class="form-control">
-		            	<option>Test</option>
+		            <% if @categories %>
+		            	<% @categories.each do |category| %>
+		            	<option><%= category.name %></option>
+		            	<% end %>
+		            <% end %>
 		            </select>
 		          </fieldset>
 		          <fieldset class="form-group">
@@ -111,21 +119,23 @@
 		    </div>
 		  </div>
 	</div>
+	<% if @products %>
+	<% @products.each do |product| %>
 	<div id="user-show-product" class="well clearfix">
 		<div class="pull-left">
-			<h4>Name: <b>Umbrella</b></h4>
-			<h4>Price: <b>$5/day</b></h4>
-			<h4>Category: <b>Utilities</b></h4>
-			<h4>Description: <b>Big black umbrella</b></h4>
+			<h4>Name: <b><%= product.name %></b></h4>
+			<h4>Price: <b>$<%= product.price %>/day</b></h4>
+			<h4>Category: <b><%= product.name %></b></h4>
+			<h4>Description: <b><%= product.description %></b></h4>
 			<div class="clearfix">
 				<div class="">
 					<form class="form pull-left" role="form" method="post" action="/login">
 						<div class="form-group">
-						<button type="button" class="btn btn-warning" data-toggle="modal" data-target=".edit_product"><b>Edit</b></button>
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target=".edit_product_<%= product.id %>"><b>Edit</b></button>
 						</div>
 					</form>
 					<!-- Edit MODAL Start -->
-					<div class="modal fade edit_product" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+					<div class="modal fade edit_product_<%= product.id %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 					    <div class="modal-dialog">
 					      <div class="modal-content">
 					        <div class="modal-header">
@@ -136,21 +146,25 @@
 					          <form action="/add_user" method="POST">
 						          <fieldset class="form-group">
 						            <label>Name</label>
-						            <input type="text" class="form-control" placeholder="Enter name" name ="name">
+						            <input type="text" class="form-control" placeholder="Enter name" name ="name" value="<%= product.name %>">
 						          </fieldset>
 						          <fieldset class="form-group">
 						            <label>Price</label>
-						            <input type="text" class="form-control" placeholder="Enter price" name ="price">
+						            <input type="text" class="form-control" placeholder="Enter price" name ="price" value="<%= product.price %>">
 						          </fieldset>
 						          <fieldset class="form-group">
 						            <label>Category</label>
 						            <select name ="category" class="form-control">
-						            	<option>Test</option>
+									<% if @categories %>
+						            	<% @categories.each do |category| %>
+						            	<option><%= category.name %></option>
+						            	<% end %>
+						            <% end %>
 						            </select>
 						          </fieldset>
 						          <fieldset class="form-group">
 						            <label>Description</label>
-						            <textarea placeholder="Enter description" class="form-control" name ="description"></textarea>   
+						            <textarea placeholder="Enter description" class="form-control" name ="description" ><%= product.description %></textarea>   
 						          </fieldset>
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						          <button type="submit" class="btn btn-success pull-right">Update</button>
@@ -165,11 +179,11 @@
 				<div >
 					<form class="form col-md-offset-1" role="form" method="post" action="/login">
 						<div class="form-group">
-						<button type="button" data-toggle="modal" data-target=".bs-example-modal-sm1" class="btn btn-danger "><b>Delete</b></button>
+						<button type="button" data-toggle="modal" data-target=".bs-example-modal-sm<%= product.id %>" class="btn btn-danger "><b>Delete</b></button>
 						</div>
 					</form>
 					<!-- delete MODAL Start -->
-			        <div id = "" class="modal fade bs-example-modal-sm1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			        <div id = "" class="modal fade bs-example-modal-sm<%= product.id %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 			          <div class="modal-dialog modal-sm">
 			            <div class="modal-content">
 			              <div class="modal-header">
@@ -193,4 +207,6 @@
 		</div>
 		<img class="pull-right" src="http://www.briscoes.co.nz/productimages/magnify/1/17124_38357_28701.jpg">
 	</div>
+	<% end %>
+	<% end %>
 </div>
