@@ -69,6 +69,7 @@
 	</div>
 	<% end %>
 	<br>
+
 	<div class="clearfix">
 		<h2 id="hello-title" class="pull-left">My Products:</h2>
 		<form class="form " role="form" method="post" action="/login">
@@ -84,19 +85,25 @@
 		          <h4 class="modal-title">Add Product</h4>
 		        </div>
 		        <div class="modal-body">
-		          <form action="/add_user" method="POST">
+		        <% if flash[:errors] %>
+		        	<% flash[:errors].each do |e| %>
+		        		<p><%= e %></p>
+		        	<% end %>
+		        <% end %>
+		          <form action="/items" method="POST" enctype="multipart/form-data">
 		          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		          <input type="hidden" name="item[user_id]" value="<%= current_user.id %>">
 		          <fieldset class="form-group">
 		            <label>Name</label>
-		            <input type="text" class="form-control" placeholder="Enter name" name ="name">
+		            <input type="text" class="form-control" placeholder="Enter name" name ="item[name]">
 		          </fieldset>
 		          <fieldset class="form-group">
 		            <label>Price</label>
-		            <input type="text" class="form-control" placeholder="Enter price" name ="price">
+		            <input type="text" class="form-control" placeholder="Enter price" name ="item[price]">
 		          </fieldset>
 		          <fieldset class="form-group">
 		            <label>Category</label>
-		            <select name ="category" class="form-control">
+		            <select name ="item[category]" class="form-control">
 		            <% if @categories %>
 		            	<% @categories.each do |category| %>
 		            	<option><%= category.name %></option>
@@ -106,8 +113,13 @@
 		          </fieldset>
 		          <fieldset class="form-group">
 		            <label>Description</label>
-		            <textarea placeholder="Enter description" class="form-control" name ="description"></textarea>   
+		            <textarea placeholder="Enter description" class="form-control" name ="item[description]"></textarea>   
 		          </fieldset>
+		          <fieldset class="form-group">
+		            <label >Choose Image
+						<input type="file"  name="item[image]">
+					</label>
+				  </fieldset>
 		          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 		          <button type="submit" class="btn btn-success pull-right">Add</button>
 		          </form>
@@ -119,6 +131,7 @@
 		    </div>
 		  </div>
 	</div>
+
 	<% if @products %>
 	<% @products.each do |product| %>
 	<div id="user-show-product" class="well clearfix">
@@ -143,18 +156,22 @@
 					          <h4 class="modal-title">Edit Product</h4>
 					        </div>
 					        <div class="modal-body">
-					          <form action="/add_user" method="POST">
+
+					          <form action="/items/<%= product.id %>" method="POST">
+					          	  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+					          	  <input type="hidden" name="item[user_id]" value="<%= current_user.id %>">
+					          	  <input type="hidden" name="_method" value="patch">
 						          <fieldset class="form-group">
 						            <label>Name</label>
-						            <input type="text" class="form-control" placeholder="Enter name" name ="name" value="<%= product.name %>">
+						            <input type="text" class="form-control" placeholder="Enter name" name ="item[name]" value="<%= product.name %>">
 						          </fieldset>
 						          <fieldset class="form-group">
 						            <label>Price</label>
-						            <input type="text" class="form-control" placeholder="Enter price" name ="price" value="<%= product.price %>">
+						            <input type="text" class="form-control" placeholder="Enter price" name ="item[price]" value="<%= product.price %>">
 						          </fieldset>
 						          <fieldset class="form-group">
 						            <label>Category</label>
-						            <select name ="category" class="form-control">
+						            <select name ="item[category]" class="form-control">
 									<% if @categories %>
 						            	<% @categories.each do |category| %>
 						            	<option><%= category.name %></option>
@@ -164,7 +181,7 @@
 						          </fieldset>
 						          <fieldset class="form-group">
 						            <label>Description</label>
-						            <textarea placeholder="Enter description" class="form-control" name ="description" ><%= product.description %></textarea>   
+						            <textarea placeholder="Enter description" class="form-control" name ="item[description]" ><%= product.description %></textarea>   
 						          </fieldset>
 						          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 						          <button type="submit" class="btn btn-success pull-right">Update</button>
@@ -191,11 +208,13 @@
 			                <h4 class="modal-title">Delete Confirmation</h4>
 			              </div>
 			              <div class="modal-body">
-			                <p>Are you sure you wan to delete <b>Umbrella</b></p>
+			                <p>Are you sure you wan to delete <b><%= product.name %></b></p>
 			              </div>
 			              <div class="modal-footer">
 			                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-			                <form action="/delete/" method="POST" class="pull-right">
+			                <form action="/items/<%= product.id %>" method="POST" class="pull-right">
+			                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			                  <input type="hidden" name="_method" value="delete">
 			                  <button type="submit" class="btn btn-danger">Delete</button>
 			                </form>
 			              </div>
@@ -205,7 +224,8 @@
 				</div>
 			</div>
 		</div>
-		<img class="pull-right" src="http://www.briscoes.co.nz/productimages/magnify/1/17124_38357_28701.jpg">
+
+		<img class="pull-right" src="<%= product.image %>">
 	</div>
 	<% end %>
 	<% end %>

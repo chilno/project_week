@@ -19,6 +19,7 @@
 }
 .multi-item-carousel img{
 	height: 300px;
+/*	width: 100%;*/
 }
 @media all and (transform-3d), (-webkit-transform-3d) {
   .multi-item-carousel .carousel-inner > .item {
@@ -171,7 +172,7 @@
 
 #latest_items {
 	display: inline-block;
-	margin: 60px;
+/*	margin: 60px;*/
 }
 
 #footer {

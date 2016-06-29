@@ -30,7 +30,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 
 
 gem 'city-state'
-
+gem 'carrierwave'
 
 # Use Unicorn as the app server
 # gem 'unicorn'

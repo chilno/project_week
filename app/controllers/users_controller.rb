@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
+  	@products = current_user.items
   	@categories = MainCategory.all
   end
 

@@ -60,19 +60,21 @@
 
 
 	<% if @items %>
+	<div id="latest_wrapper">
 		<h3>Latest Added Items </h3>
-		<ul id="latest_wrapper">
+		<ul >
 			<% @items.each do |i| %>
 				<div id="latest_items">
 					<li class="items"><a href="/items/<%= i.id %>">
-						<img  style="height: 100px; width: 100px;" src="http://pngimg.com/upload/suit_PNG8122.png">
-						<h5><%= i.name %></h5><h5><%= i.price %></h5>
+						<img  style="height: 100px; width: 100px;" src="<%= i.image %>">
+						<h5><%= i.name %></h5><h5>$<%= i.price %>/day</h5>
 
 					</a></li>
 				</div>
 			<% end %>
 		</ul>
 	<% end %>
+	</div>
 
 <div id="footer">
 	<% if @categories  %>
