@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'results/index'
+
+  get 'results/show'
+
   get 'sessions/new'
 
   get 'sessions/index'
@@ -23,8 +27,9 @@ Rails.application.routes.draw do
   resources 'users'
   resources 'items'
   resources 'categories'
+  resources 'results'
 
-  root 'sessions#index'
+  root 'items#index'
 
 
 

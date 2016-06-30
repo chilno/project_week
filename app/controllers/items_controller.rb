@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   	@items = Item.all
   end
   def create
+
   	@products = Item.new(item_params)
   	if @products.save
   		redirect_to "/users/#{current_user.id}"
@@ -36,6 +37,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-  	params.require(:item).permit(:name, :price, :description, :user_id,  :image)
+    @category = Category.find_by(name: params[:category])
+  	params.require(:item).permit(:name, :price, :description, :user_id,  :image).merge(category_id: @category.id)
   end
 end

@@ -103,7 +103,7 @@
 		          </fieldset>
 		          <fieldset class="form-group">
 		            <label>Category</label>
-		            <select name ="item[category]" class="form-control">
+		            <select name ="category" class="form-control">
 		            <% if @categories %>
 		            	<% @categories.each do |category| %>
 		            	<option><%= category.name %></option>
@@ -138,7 +138,7 @@
 		<div class="pull-left">
 			<h4>Name: <b><%= product.name %></b></h4>
 			<h4>Price: <b>$<%= product.price %>/day</b></h4>
-			<h4>Category: <b><%= product.name %></b></h4>
+			<h4>Category: <b><%= product.category.name.capitalize %></b></h4>
 			<h4>Description: <b><%= product.description %></b></h4>
 			<div class="clearfix">
 				<div class="">

@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def show
   	@products = current_user.items
-  	@categories = MainCategory.all
+  	@categories = Category.all
   end
 
   private
