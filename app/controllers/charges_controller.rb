@@ -32,7 +32,7 @@ class ChargesController < ApplicationController
 		cart.each do |c|
 			sum += c.item.price * c.days
 			item_sum = c.item.price * c.days
-			Rental.create(user_id: 1, duration: c.days, price: item_sum, item_id: c.item.id )
+			Rental.create(user_id: current_user.id, duration: c.days, price: item_sum, item_id: c.item.id )
 
 			SCHEDULER.in (c.days-1).to_s + 'd' do
 

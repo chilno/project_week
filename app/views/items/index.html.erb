@@ -65,7 +65,7 @@
 				        <div class="modal-body">
 				          <form action="/add_to_cart" method="post">
 				  			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input>
-				  			<input type="hidden" name="item_id" value="2">
+				  			<input type="hidden" name="item_id" value="<%=r.id%>">
 				<input type="date" name="start"></td>
 				 <input type="number" name="days"></td>
 
@@ -88,36 +88,23 @@
 
 
 	<% if @items %>
+	<div id="latest_wrapper">
 		<h3>Latest Added Items </h3>
-		<ul id="latest_wrapper">
+		<ul >
 			<% @items.each do |i| %>
 				<div id="latest_items">
 					<li class="items"><a href="/items/<%= i.id %>">
-						<img  style="height: 100px; width: 100px;" src="http://pngimg.com/upload/suit_PNG8122.png">
-						<h5><%= i.name %></h5><h5><%= i.price %></h5>
+						<img  style="height: 100px; width: 100px;" src="<%= i.image %>">
+						<h5><%= i.name %></h5><h5>$<%= i.price %>/day</h5>
 
 					</a></li>
 				</div>
 			<% end %>
 		</ul>
 	<% end %>
-
-<div id="footer">
-	<% if @categories  %>
-	<% @categories.each do |c| %>
-	<div id="footer_columns">
-		<h4><%= c.name %></h6>
-		<ul>
-			<% c.sub_categories.each do |sub| %>
-			<li class="list"><a href="/sub_categories/<%= sub.id%>"><%= sub.name %></a></li>
-			<% end %>
-		</ul>
 	</div>
-	<% end %>
-	<% end %>
-</div>
-<div id="dark_footer"></div>
-</div>
+
+
 <script type="text/javascript">
 	$('.multi-item-carousel').carousel({
 	  interval: 3000

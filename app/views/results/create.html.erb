@@ -1,0 +1,26 @@
+<div class="container">
+	<br>
+	<br>
+	<div class="col-md-12 ">
+		<% if @search %>
+			<% @search.each do |s| %>
+					<div class="col-md-3 ">
+						<div class="well box clearfix">
+							<a href="">
+								<img src="<%= s.image %>">
+								<h4><%= s.name %></h4>
+								<p><%= s.description %></p>
+								<p>$ <%= s.price %> /day</p>
+								<form action="/results" method="post">
+									<a type= "submit" name = "link" href=""><%= s.category.name.capitalize %></a>
+								</form>
+								
+							</a>
+							<br>
+							<a href="" class="btn btn-info pull-right">Add to Cart</a>
+						</div>
+					</div>
+			<% end %>
+		<% end %>	
+	</div>
+</div>
