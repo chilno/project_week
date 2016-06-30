@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
   def index
-  	@search
+  
   end
 
   def show

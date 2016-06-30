@@ -31,6 +31,12 @@ Rails.application.routes.draw do
 
   root 'items#index'
 
+  resources :charges
+
+get '/items' => 'items#index'
+post '/add_to_cart' => 'items#add_to_cart'
+get '/scheduler' => 'items#scheduler'
+get '/destroy' => 'items#destroy'
 
 
 

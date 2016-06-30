@@ -51,7 +51,35 @@
 				<div>
 				<h4><%= r.name %></h4>
 				<h5><%= r.price%></h5>
-				<a href="/items/<%= r.id %>"><button>Rent</button></a></div>
+				 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add To Cart</button>
+
+				<div class="modal fade" id="myModal" role="dialog">
+				    <div class="modal-dialog">
+				    
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				          <h4 class="modal-title">Modal Header</h4>
+				        </div>
+				        <div class="modal-body">
+				          <form action="/add_to_cart" method="post">
+				  			<input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>"></input>
+				  			<input type="hidden" name="item_id" value="<%=r.id%>">
+				<input type="date" name="start"></td>
+				 <input type="number" name="days"></td>
+
+				<input type="submit" name="submit" value="Add to Cart">
+				  </form>
+				        </div>
+				        <div class="modal-footer">
+				          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				        </div>
+				      </div>
+				      
+				    </div>
+				  </div>
+				</div>
 			</div>
 		<% end %>
 	</div>
@@ -76,22 +104,7 @@
 	<% end %>
 	</div>
 
-<div id="footer">
-	<% if @categories  %>
-	<% @categories.each do |c| %>
-	<div id="footer_columns">
-		<h4><%= c.name %></h6>
-		<ul>
-			<% c.sub_categories.each do |sub| %>
-			<li class="list"><a href="/sub_categories/<%= sub.id%>"><%= sub.name %></a></li>
-			<% end %>
-		</ul>
-	</div>
-	<% end %>
-	<% end %>
-</div>
-<div id="dark_footer"></div>
-</div>
+
 <script type="text/javascript">
 	$('.multi-item-carousel').carousel({
 	  interval: 3000
