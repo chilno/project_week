@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20160630183650) do
 
   create_table "carts", force: :cascade do |t|
@@ -22,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160630183650) do
   end
 
   add_index "carts", ["item_id"], name: "index_carts_on_item_id"
+
 
   create_table "item_subs", force: :cascade do |t|
     t.integer  "item_id"
@@ -40,9 +42,12 @@ ActiveRecord::Schema.define(version: 20160630183650) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "image"
+    t.integer  "category_id"
   end
 
   add_index "items", ["user_id"], name: "index_items_on_user_id"
+
 
   create_table "main_categories", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +66,8 @@ ActiveRecord::Schema.define(version: 20160630183650) do
 
   add_index "rentals", ["item_id"], name: "index_rentals_on_item_id"
   add_index "rentals", ["user_id"], name: "index_rentals_on_user_id"
+
+
 
   create_table "sub_categories", force: :cascade do |t|
     t.string   "name"

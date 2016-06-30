@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'results/index'
+
+  get 'results/show'
+
   get 'sessions/new'
 
   get 'sessions/index'
@@ -23,13 +27,14 @@ Rails.application.routes.draw do
   resources 'users'
   resources 'items'
   resources 'categories'
+  resources 'results'
 
-  root 'sessions#index'
+  root 'items#index'
 
   resources :charges
 
 get '/items' => 'items#index'
-post '/add_to_cart' => 'items#create'
+post '/add_to_cart' => 'items#add_to_cart'
 get '/scheduler' => 'items#scheduler'
 get '/destroy' => 'items#destroy'
 

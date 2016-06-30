@@ -34,7 +34,11 @@ gem 'rufus-scheduler'
 
 gem 'city-state'
 
+
 gem 'mail'
+
+gem 'carrierwave'
+
 
 gem 'rufus-scheduler'
 # Use Unicorn as the app server

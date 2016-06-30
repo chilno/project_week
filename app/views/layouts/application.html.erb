@@ -19,12 +19,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">rentMe</a>
+        <a class="navbar-brand" href="/"><p><b>rentMe</b></p></a>
       </div>
-      <% unless current_page?('/users/new') or current_page?('/users/new')%>
-      <form class="navbar-form navbar-left" role="search" >
+      <% unless current_page?('/users') or current_page?('/users/new')%>
+      <form action="/results" class="navbar-form navbar-left" role="search" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
         <div class="form-group">
-          <input type="text" class="form-control " placeholder="What are you looking for..?" id="search-bar">
+          <input type="text" class="form-control " placeholder="What are you looking for..?" name="search">
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
       </form>
@@ -37,7 +38,7 @@
             <% unless session[:id]%>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
             <% else %>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%= @user.first_name %></b> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><%= current_user.first_name %></b> <span class="caret"></span></a>
             <% end %>
 
             <ul id="login-dp" class="dropdown-menu">
@@ -45,7 +46,8 @@
                 <div class="row">
                   <div class="col-md-12">
                   <% unless session[:id]%>
-                   <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
+                   <form class="form" role="form" method="post" action="/sessions" accept-charset="UTF-8" id="login-nav">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
                     <div class="form-group">
                       <label class="sr-only" for="exampleInputEmail2">Email address</label>
                       <input type="email" class="form-control" name="username" id="exampleInputEmail2" placeholder="Email address" required>
@@ -63,7 +65,10 @@
                     New here ? <a href="/users/new"><b>Join Us</b></a>
                   </div>
                   <% else %>
-                    <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
+                    <a href="/users/<%= current_user.id %>" class="btn btn-info" style="color:white; width:100%">My Profile</a>
+                    <form class="form" role="form" method="post" action="/sessions/<%= current_user.id %>" accept-charset="UTF-8" id="login-nav">
+                      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+                      <input type="hidden" name="_method" value="delete">
                       <div class="form-group">
                        <button type="submit" class="btn btn btn-block"><b>Log Out</b></button>
                       </div>
