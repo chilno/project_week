@@ -11,4 +11,5 @@
 # User.create(first_name: "Ana", last_name: "Thomas", email: "ana.thomas@gmail.com", password: "1234", phone: "5544387922", city: "Sunnyvale", state: "CA")
 # User.create(first_name: "Frank", last_name: "Modic", email: "frank.modic@gmail.com", password: "1234", phone: "1234567890", city: "San Jose", state: "CA")
 # User.create(first_name: "Deandre", last_name: "Harvey", email: "deandre.harvey@gmail.com", password: "1234", phone: "0987654321", city: "Sunnyvale", state: "CA")
-Category.create([{name:'Appliances'},{name:'Automotive'},{name:'Books'},{name:'Music'},{name:'Clothing'},{name:'Electronics'},{name:'Kitchen'},{name:'Sports'},{name:'Camping'},{name:'Gaming'}])
+#Category.create([{name:'Appliances'},{name:'Automotive'},{name:'Books'},{name:'Music'},{name:'Clothing'},{name:'Electronics'},{name:'Kitchen'},{name:'Sports'},{name:'Camping'},{name:'Gaming'}])
+Item.create([{name: 'Phone', price:50, description:'Great Phone', user_id: 1},{name: 'Umbrella', price:5, description:'Great Umbrella', user_id: 2},{name: 'Kayak', price:50, description:'Great Kayak', user_id: 3}])
