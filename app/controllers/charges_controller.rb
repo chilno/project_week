@@ -32,18 +32,18 @@ class ChargesController < ApplicationController
 
 	def create
 	  # Amount in cents
+	  	user_email = current_user.email
 		sum =0
 		cart = Cart.all
 		cart.each do |c|
 			sum += c.item.price * c.days
 			item_sum = c.item.price * c.days
 			Rental.create(user_id: current_user.id, duration: c.days, price: item_sum, item_id: c.item.id )
-
 			SCHEDULER.in (c.days-1).to_s + 'd' do
-
+				puts user_email
 				Mail.deliver do
 					from    'rentapp22@gmail.com'
-					to      'anathomasity@gmail.com'
+					to      user_email
 					subject 'Your rental will expire tomorrow'
 					body    'Some simple body'
 				end
@@ -51,9 +51,10 @@ class ChargesController < ApplicationController
 		end 
 
 		SCHEDULER.in '5s' do
+			puts user_email
 			Mail.deliver do
 				from    'rentapp22@gmail.com'
-				to      'anathomasity@gmail.com'
+				to      user_email
 				subject 'Your successfully rented from RentApp'
 				body    'Some simple body'
 			end
