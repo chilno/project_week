@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def show
-  	@products = current_user.items
+  	@products = current_user.items.order(id: :desc)
   	@categories = Category.all
   end
 

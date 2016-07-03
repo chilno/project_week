@@ -90,16 +90,19 @@
 		        		<p><%= e %></p>
 		        	<% end %>
 		        <% end %>
-		          <form action="/items" method="POST" enctype="multipart/form-data">
+		          <form  id="add_product" action="/items" method="POST" enctype="multipart/form-data">
 		          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 		          <input type="hidden" name="item[user_id]" value="<%= current_user.id %>">
+		          
 		          <fieldset class="form-group">
 		            <label>Name</label>
 		            <input type="text" class="form-control" placeholder="Enter name" name ="item[name]">
+		            <div class="name"></div>
 		          </fieldset>
 		          <fieldset class="form-group">
 		            <label>Price</label>
 		            <input type="text" class="form-control" placeholder="Enter price" name ="item[price]">
+		            <div class="price"></div>
 		          </fieldset>
 		          <fieldset class="form-group">
 		            <label>Category</label>
@@ -113,7 +116,8 @@
 		          </fieldset>
 		          <fieldset class="form-group">
 		            <label>Description</label>
-		            <textarea placeholder="Enter description" class="form-control" name ="item[description]"></textarea>   
+		            <textarea placeholder="Enter description" class="form-control" name ="item[description]"></textarea> 
+		            <div class="description"></div>  
 		          </fieldset>
 		          <fieldset class="form-group">
 		            <label >Choose Image
@@ -171,7 +175,7 @@
 						          </fieldset>
 						          <fieldset class="form-group">
 						            <label>Category</label>
-						            <select name ="item[category]" class="form-control">
+						            <select name ="category"  class="form-control">
 									<% if @categories %>
 						            	<% @categories.each do |category| %>
 						            	<option><%= category.name %></option>

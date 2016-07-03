@@ -12,13 +12,17 @@ class ItemsController < ApplicationController
   end
 
   def create
-
+    # x = params[:item][:category]
+    # json_message = {:status => 'success', :message => 'Thank you! We have created a new user!'}
+    # render json: json_message
   	@products = Item.new(item_params)
   	if @products.save
   		redirect_to "/users/#{current_user.id}"
   	else
-  		flash[:errors] = @products.errors.full_messages
-  		redirect_to "/users/#{current_user.id}"
+      json_message ={ :error => @products.errors.full_messages }
+      render json: json_message
+  	# 	flash[:errors] = @products.errors.full_messages
+  	# 	redirect_to "/users/#{current_user.id}"
   	end
   end
 
