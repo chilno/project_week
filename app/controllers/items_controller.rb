@@ -17,11 +17,14 @@ class ItemsController < ApplicationController
     # render json: json_message
   	@products = Item.new(item_params)
   	if @products.save
-  		redirect_to "/users/#{current_user.id}"
+      # format.js {flash[:notice] = @products.name+" Successfully Created"}
+      json_message = { :notice => @products.name+" Successfully Created" }
+      render json: json_message
+  		# redirect_to "/users/#{current_user.id}"
   	else
       json_message ={ :error => @products.errors.full_messages }
       render json: json_message
-  	# 	flash[:errors] = @products.errors.full_messages
+  		# flash[:errors] = @products.errors.full_messages
   	# 	redirect_to "/users/#{current_user.id}"
   	end
   end

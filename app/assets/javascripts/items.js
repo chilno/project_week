@@ -1,10 +1,10 @@
 $(document).ready(function(){
 	$("#add_product").submit(function(e){
+
 		e.preventDefault();
 		$.post('/items', $(this).serialize(), function(data){
 			if (data.error) {
 				 var err = data.error
-				 $('.name, .price, .description').html('');
 				 $('.name, .price, .description').prev('input, textarea').css({'border': ''});
 				 for(key in err){
 				 	if (err[key].includes("Name") == true) {
@@ -21,10 +21,18 @@ $(document).ready(function(){
 				 	}
 				 }
 			}else{
-				// alert("Hello");
-				$('.add_product').modal('hide');
 				location.reload();
+				console.log(data.notice);		
+				// $('.add_product').modal('hide');
+				$('#flash').html(data.notice);
+				// $('#flash').addClass('alert alert-success').append('<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>').append('<p>Successfully added</p>');
+
 			}
 		});
 	});
+
+	// $.get('https://api.github.com/emojis', function(data){
+	// 	$('#hello-title').append("<img src='"+data['car']+"' >");
+	// 	console.log(data);
+	// });
 });
